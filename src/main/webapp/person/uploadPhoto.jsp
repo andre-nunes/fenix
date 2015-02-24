@@ -64,6 +64,7 @@
 				$('<div id="photo-uploader"></div>').prependTo('#photoForm').css('margin-bottom','15px');
 				phroper.start(false,captions);
 				$('#photoForm table').toggle();
+				$('#oldPhotoUpload').toggle();
 				
 				$('#submitButton').click( function () {
 					if (phroper.hasLoadedPicture()) {
@@ -84,6 +85,7 @@
 					$('#photoForm table').toggle();
 					$('#resetButton').toggle();
 					$('#toggleClassic').toggle();
+					$('#oldPhotoUpload').toggle();
 				});
 			}
 		});
@@ -128,18 +130,19 @@
 		<input type="hidden" id="phroperLoadingCaption" value="<%= request.getAttribute("phroperLoadingCaption") != null ? request.getAttribute("phroperLoadingCaption") : "" %>" />
 	</logic:notPresent>
 
-    <logic:notPresent name="preview">
-		
-    	<fr:edit id="photoUpload" name="photo" schema="party.photo.upload">
-            <fr:layout name="tabular-editable">
-                <fr:property name="classes" value="tstyle2 thlight thwhite"/>
-            </fr:layout>
-        </fr:edit>
-    	<html:submit styleId="submitButton" bundle="HTMLALT_RESOURCES" altKey="submit.submit"
-		  onclick="this.form.method.value='upload'">
-		  <bean:message key="button.submit" />
-	   </html:submit>
-    </logic:notPresent>
+	<logic:notPresent name="preview">
+		<div id="oldPhotoUpload">
+			<fr:edit id="photoUpload" name="photo" schema="party.photo.upload">
+				<fr:layout name="tabular-editable">
+					<fr:property name="classes" value="tstyle2 thlight thwhite" />
+				</fr:layout>
+			</fr:edit>
+		</div>
+		<html:submit styleId="submitButton" bundle="HTMLALT_RESOURCES" altKey="submit.submit"
+			onclick="this.form.method.value='upload'">
+			<bean:message key="button.submit" />
+		</html:submit>
+	</logic:notPresent>
 
 	<logic:present name="preview">
         <p class="mtop2">
